@@ -211,7 +211,11 @@ class QuestionsController < ApplicationController
       retryable(:tries => 5) do
         if @question_two.save
           @question = @question_two
-          earl = Earl.create(:question_id => @question.id, :name => params[:question]['url'].strip, :logo => params[:question]['logo'])
+	  if(params[:question]['logo'])
+          	earl = Earl.create(:question_id => @question.id, :name => params[:question]['url'].strip, :logo => params[:question]['logo'])
+	  else
+          	earl = Earl.create(:question_id => @question.id, :name => params[:question]['url'].strip)
+	  end
           logger.info "Question was successfully created."
           session[:standard_flash] = "Congratulations. You are about to discover some great ideas.<br/> Send out your URL: #{@question.fq_earl} and watch what happens."
           ::ClearanceMailer.deliver_confirmation(current_user, @question.fq_earl) if just_registered

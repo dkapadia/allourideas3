@@ -23,3 +23,4 @@ API_HOST = "http://localhost:3000"
 
 PAIRWISE_USERNAME = "pairwisetest@dkapadia.com"
 PAIRWISE_PASSWORD = "wheatthins"
+Paperclip.options[:image_magick_path] = '/usr/bin/'

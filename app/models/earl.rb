@@ -3,7 +3,7 @@ class Earl < ActiveRecord::Base
   validates_presence_of :name, :on => :create, :message => "can't be blank"
   has_friendly_id :name, :use_slug => true, :reserved => ["questions", "question", 'about', 'privacy', 'tour']
 
-  has_attached_file :logo
+  has_attached_file :logo, :style => { :headersize => "250x50>" }
   
   def question
     Question.find(question_id)

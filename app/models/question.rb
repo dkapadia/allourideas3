@@ -4,6 +4,7 @@ class Question < ActiveResource::Base
   self.password = PAIRWISE_PASSWORD
 
   attr_accessor :name, :question_text, :question_ideas, :url, :information, :email, :password
+
   
   def self.find_by_name(name)
     Earl.find(name).question rescue nil

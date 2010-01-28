@@ -6,7 +6,7 @@
   = link_to(t('questions.new.see_an'), "/studentgovernment")
   = t('questions.new.exp2')
 %left.create-question
-  -form_for :question, @question, :url => questions_path, :html => {:id => 'new_question_form'} do |f|
+  -form_for :question, @question, :url => questions_path, :html => {:id => 'new_question_form', :multipart => true} do |f|
     %p
       = f.error_messages :header_message => "#{@question.errors.length} #{t('questions.new.error.header')}"
       - if flash[:registration_error]
@@ -59,11 +59,19 @@
 
         = "Password:"
         = f.password_field 'password', :class => 'required', :size => 20#, :title => "Give us a password you'll remember", :maxlength => Const::MAX_QUESTION_LENGTH
+    -if @registered
+      %h2= "Step 4: [Optional] Add a Logo to your Question."
+    -else
+      %h2= "Step 5: [Optional] Add a Logo to your Question."
+    %p
+      You can personalize your question by adding a logo to the question page. The recommended size for logos is 250px in width by 50px in height. 
+    = f.file_field :logo
+
 
     -if @registered
-      %h2= "Step 4 [Optional]: Help Us Out"
-    -else
       %h2= "Step 5 [Optional]: Help Us Out"
+    -else
+      %h2= "Step 6 [Optional]: Help Us Out"
     %p
       Please tell us a bit about what you are trying to accomplish with All Our Ideas.
       %br

@@ -2,7 +2,7 @@
   .fleft
     = link_to(image_tag("logo#{'-small' if @question_id}.jpg"), root_path, :class => 'logo')
     -if @earl && !@earl.logo_file_name.nil?
-      = link_to(image_tag(@earl.logo.url), root_path, :class => 'logo')
+      = link_to(image_tag(@earl.logo.url(:headersize)), root_path, :class => 'logo')
   .fright
     -if !@question_id
       %ul

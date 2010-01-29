@@ -210,11 +210,21 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       retryable(:tries => 5) do
         if @question_two.save
+	  logger.info("just saved!")
           @question = @question_two
+	  logger.info("just saved2!")
+	    
 	  if(params[:question]['logo'])
+	  	logger.info("just saved6!")
+		logger.info(@question.id)
+		logger.info(params[:question]['url'].strip)
           	earl = Earl.create(:question_id => @question.id, :name => params[:question]['url'].strip, :logo => params[:question]['logo'])
+	  	logger.info("just saved8!")
+	  	logger.info("just saved3!")
 	  else
+	  	logger.info("just saved4!")
           	earl = Earl.create(:question_id => @question.id, :name => params[:question]['url'].strip)
+	  	logger.info("just saved5!")
 	  end
           logger.info "Question was successfully created."
           session[:standard_flash] = "Congratulations. You are about to discover some great ideas.<br/> Send out your URL: #{@question.fq_earl} and watch what happens."
